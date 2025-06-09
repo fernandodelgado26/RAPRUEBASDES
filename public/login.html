@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Formulario de Acceso</title>    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Videojuegos & Desarrollo">
+    <meta name="description" content="Ejemplo de formulario de acceso basado en HTML5 y CSS">
+    <meta name="keywords" content="login, formulario de acceso html">
+    <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div id="contenedor">
+        <div id="contenedorcentrado">
+            <div id="login">
+                <form id="loginform">
+                    <label for="user"># de relog</label>
+                    <input id="user" type="text" name="user" placeholder="Usuario" required>
+                    
+                    <label for="pass">Contraseña</label>
+                    <input id="pass" type="password" name="pass" placeholder="Contraseña" required>
+                    
+                    <button type="submit" title="Ingresar" name="Ingresar">Login</button>
+                </form>
+                <div id="mensaje" style="color:red; margin-top:10px;"></div>
+            </div>
+            
+            <div id="derecho">
+                <div class="titulo">
+                    Bienvenido
+                    <br>
+                    EMPRESA X
+                </div>
+                <hr>
+                <div class="pie-form">
+                    <a href="#">¿Perdiste tu contraseña?</a>
+                    <hr>
+                    <a href="#">« Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('loginform');
+        const mensajeDiv = document.getElementById('mensaje');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const user = form.user.value;
+            const pass = form.pass.value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({ user, pass })
+                });
+
+                const text = await response.text();
+
+                if (response.ok && text.includes('✅')) {
+                    window.location.href = 'home/home.html'; 
+                } else {
+                    mensajeDiv.textContent = text;
+                }
+            } catch (error) {
+                mensajeDiv.textContent = 'Error en la conexión con el servidor.';
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>

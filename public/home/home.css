@@ -1,0 +1,150 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+header {
+  background-color: #222; /* gris oscuro */
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+/* Título a la izquierda */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Nav-items en el header, al centro */
+.nav-items {
+  display: flex;
+  gap: 15px;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.nav-item {
+  cursor: pointer;
+  padding: 10px 18px;
+  border-radius: 6px;
+  background-color: #222;
+  color: white;
+  transition: background-color 0.3s;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.nav-item:hover {
+  background-color: #666;
+}
+
+/* Botón salir a la derecha */
+.logout-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.logout-btn:hover {
+  background-color: #e60000;
+}
+
+/* MAIN dividido en dos columnas */
+main {
+  flex: 1;
+  display: flex;
+  height: calc(100vh - 66px); /* altura total menos header */
+}
+
+/* Panel izquierdo - texto */
+.left-panel {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+}
+
+.left-panel h1 {
+  margin-bottom: 20px;
+  font-size: 36px;
+  color: #333;
+}
+
+.left-panel p {
+  font-size: 18px;
+  color: #555;
+}
+
+/* Panel derecho */
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: #fafafa;
+}
+
+/* Contenedor de las imágenes */
+.image-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Imagen borrosa de fondo */
+.blurred-image {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url('../imagenes/home.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  z-index: 1;
+  border-radius: 10px;
+}
+
+/* Imagen encima que se mueve */
+.moving-image {
+  position: absolute;
+  bottom: -150px; /* comienza fuera de vista */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  max-width: 400px;
+  z-index: 2;
+  opacity: 0;
+  animation: slideUp 2s forwards ease-out;
+  border-radius: 10px;
+}
+
+@keyframes slideUp {
+  to {
+    bottom: 50px;
+    opacity: 1;
+  }
+}
